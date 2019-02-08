@@ -2,6 +2,7 @@ baseURL = "https://utkarshverma.github.io/blog"
 title = "UtkarshVerma's Blog"
 theme = "dream-plus"
 ignoreFiles = ["content/404.md", "content/about.md", "content/cards/\\.*"]
+canonifyURLs = true
 
 pygmentsCodeFences = true
 pygmentsUseClasses = true
@@ -15,12 +16,11 @@ enableEmoji=true
 [params]
 	contentType = "posts"
 	siteStartYear = 2018
-	favicon = "/images/favicon.ico"
 
 	[params.author]
 		author = "Utkarsh Verma"
 		description = "Just a random blog for random stuff, mostly tech-related."
-		avatar = "/images/avatar.jpg"
+		avatar = "../images/avatar.jpg"
 		motto = "A keen maker, programmer and an Instructables author."
 
 	[params.background]
