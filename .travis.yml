@@ -1,0 +1,46 @@
+matrix:
+  include:
+  - name: Blog
+    env:
+    - config=blog.toml
+  - name: Landing Site
+    env:
+    - config=landing.toml
+
+env:
+  global:
+  - minVer=0.48
+  - secure: HBruhGrSLeAWte0rv6LveJL9FQKchBV9NUU7UWTZOaiA2Xc5+sm2TB0GYuydQM1NGtdbiThIDWbukxYba0Hth1XvY/dIVEWNL2G4Dou6cVcFkObeBl/Z596OmqThZr1phWpeLX6J+bpOYlin9MIIgiuzk1/hVVuZWuOB1QS1MNfNbQSzXhIprITBpxfsbuM5Iam8cREq/WlgRadgej0M8Qu25hPNJk5enRKIo89mDvkruf4N7WlmR2nOqnIz6BGaydRAQ42/pOWQP2T46LDbvTAskENBfLy+YpS/C9kSp/ziZMdeXo/sr1i8j+lNZo18vyKwhsM01MttSe2RrP//3eg8Tno4XcWv9BSj3clQ8mAo2dNHdHgJjWBMphIwkrANexMaNfbcnw5Aeegy50KL3JqcuQTu0U9bwhozvn6ylhOAEzpdDc0RN7Q7gyuljnw6oW6of9TEakt5xOZlGhvaypPnCj89KA5ELBeFZSqDs0S4Wa5PoaK11h9FOLkTDCIAuWXtT3cwH+b17JwqCvcHBlP4Cwk8NiggiSBPTHaZgccLpb8kCaviGnQjFhQtouqxLSVopY1elJLvsOm+C6dPhRvXFv1XMJz27PCNd7ACc+ejNy8k0TH7G26xVj2SGwI0oBEiY3VXLA+v3sjXJ2s1dAKt6K76Mw6QZXcI+T7Yluc=
+
+install:
+- mkdir ~/_bin
+- link="https://github.com/gohugoio/hugo/releases/download/v${minVer}/hugo_${minVer}_Linux-64bit.tar.gz"
+- wget $link -O hugo.tgz
+- tar xfv hugo.tgz -C ~/_bin
+- rm hugo.tgz ~/_bin/*.md
+- export PATH=$HOME/_bin:$PATH
+
+script:
+- rm -rf public || exit 0
+- hugo version
+- hugo --config "$config"
+
+deploy:
+  - provider: pages
+    repo: UtkarshVerma/blog
+    github-token: "$GITHUB_TOKEN"
+    local-dir: public
+    skip-cleanup: true
+    keep-history: true
+    on:
+      branch: source
+      condition: $config = blog.toml
+  - provider: pages
+    github-token: "$GITHUB_TOKEN"
+    local-dir: public
+    target-branch: master
+    skip-cleanup: true
+    keep-history: true
+    on:
+      branch: source
+      condition: $config = landing.toml

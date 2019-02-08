@@ -1,0 +1,45 @@
+baseURL = "https://utkarshverma.github.io/blog"
+title = "UtkarshVerma's Blog"
+theme = "dream-plus"
+ignoreFiles = ["content/404.md", "content/about.md", "content/cards/\\.*"]
+
+pygmentsCodeFences = true
+pygmentsUseClasses = true
+pygmentsOptions = "linenos=table"
+
+googleAnalytics = "UA-112332904-1"
+disqusShortname = "UtkarshVermaBlog"
+enableRobotsTXT = true
+enableEmoji=true
+
+[params]
+	contentType = "posts"
+	siteStartYear = 2018
+	favicon = "/images/favicon.ico"
+
+	[params.author]
+		author = "Utkarsh Verma"
+		description = "Just a random blog for random stuff, mostly tech-related."
+		avatar = "/images/avatar.jpg"
+		motto = "A keen maker, programmer and an Instructables author."
+
+	[params.background]
+		colorBG= true
+
+	[params.features]
+		enableToc = true
+		enableShareCard = true
+		twitterEmoji=true
+	
+	[params.tags]
+		enabled = true
+
+	[params.categories]
+		enabled = true
+
+[social]
+	email = "utkarshverma@pm.me"
+	github = "UtkarshVerma"
+	stackoverflow = "9271608/utkarsh-verma"
+	medium = "UtkarshVerma_"
+	twitter = "UtkarshVerma_"
