@@ -14,13 +14,12 @@ enableRobotsTXT = true
 enableEmoji=true
 
 [params]
-	contentType = "posts"
 	siteStartYear = 2018
 
 	[params.author]
 		author = "Utkarsh Verma"
 		description = "Just a random blog for random stuff, mostly tech-related."
-		avatar = "../images/avatar.jpg"
+		avatar = "https://utkarshverma.github.io/images/avatar.jpg"
 		motto = "A keen maker, programmer and an Instructables author."
 
 	[params.background]

@@ -10,7 +10,6 @@ enableEmoji = true
 
 [params]
 	favicon = "/images/favicon.ico"
-	contentType = "cards"
 	siteStartYear = 2018
 	
 	[params.author]
