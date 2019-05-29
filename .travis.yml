@@ -8,7 +8,7 @@ matrix:
     - config=landing.toml
 env:
   global:
-  - minVer=0.48
+  - minVer=0.55.0
   - secure: aRp18llpTBbVyBTE4LX0DRxbip4LmN0O7t6TUthHTdjV/NsblyT6eJnYUpqbIDwBVXxyQHOPHr7JBt3+q0NLXfx3rghGQlcNvy/+xWmWreIQOZSwQ2i+33sEeVb2mbbhiXrBWNspcRt3cNYEkbtGbUGg3F3bSspHy2EpC68yeWeiiRolioyU3MVcsBTkWfRrPHO/nc8SfQpuZ12ckB/5M66KmbXBU1+ZRMRTYoBdCnm8lf2vcjjsI2zI4W+uFma8O+rb7J99nHuJvP+lOBhKv0/abmneUwffVwI2HZ+mgQLTjnSEGsTjjAeWQXfo+AEgVqH8EgIiM24Sn4WCMl/7zU2GI0zN4DdLXBmrtcSDMQH6OuLopjKdvZlMBOxcXOuBSyV8U5AnHR41XHLlnXK7TuupzPd43EUGXZY2x/A+7Et5ayhzfHkhaX7Jz6SW2eRIYBlKzxj42J7fiP1xKX5yXIFJkgZXBc43/irYrAfntTClansbq+bKWZnwXdNKpmFdumvhGq3PTa3RONwSD3bzGQlFmyb15hJlgusaFz2/vRJYN98K4ZxVXugwynpp75CiynVAe2bfeyGf/EPuKrrQ5W/KJgvWD3Bt6EGAKuXG42KxLq9slA12d9srZZug7/zSi4gQYSjz0zsYe2yoloQbe8EnobvqRkvqqbTngZzgVtU=
 install:
 - mkdir ~/_bin

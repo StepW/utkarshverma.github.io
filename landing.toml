@@ -18,9 +18,6 @@ enableEmoji = true
 		avatar = "/images/avatar.jpg"
 		motto = "A keen maker, programmer and an Instructables author."
 
-	[params.background]
-		colorBG = true
-
 	[params.features]
 		twitterEmoji = true
 		coverArgs = "400x200 q100"

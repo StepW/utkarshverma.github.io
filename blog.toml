@@ -22,9 +22,6 @@ enableEmoji=true
 		avatar = "https://utkarshverma.github.io/images/avatar.jpg"
 		motto = "A keen maker, programmer and an Instructables author."
 
-	[params.background]
-		colorBG= true
-
 	[params.features]
 		enableToc = true
 		enableShareCard = true
