@@ -39,7 +39,13 @@
   
   <url>
     <loc>https://utkarshverma.github.io/cards/</loc>
-    <lastmod>2018-01-31T00:34:29+05:30</lastmod>
+    <lastmod>2018-04-08T21:49:02+05:30</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://utkarshverma.github.io/</loc>
+    <lastmod>2018-04-08T21:49:02+05:30</lastmod>
     <priority>0</priority>
   </url>
   
@@ -50,12 +56,6 @@
   
   <url>
     <loc>https://utkarshverma.github.io/tags/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://utkarshverma.github.io/</loc>
-    <lastmod>2018-01-31T00:34:29+05:30</lastmod>
     <priority>0</priority>
   </url>
   
