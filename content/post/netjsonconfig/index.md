@@ -1,16 +1,16 @@
 ---
-title: "Testing \"django-netjsonconfig\""
+title: Testing "django-netjsonconfig"
 authors:
 - utkarsh
-date: 2018-01-14T14:28:40+05:30
+date: 2018-01-14T08:58:40.000+00:00
 tags:
+- django
 - google code in
 - openwisp
-- django
 categories:
 - programming
-description : "The challenges which I faced while installing and using **django-netjsonconfig**."
-draft: false
+description: The challenges which I faced while installing and using **django-netjsonconfig**.
+
 ---
 A task came up in Google Code-in which asked me to install the [django-netjsonconfig](https://github.com/openwisp/django-netjsonconfig) module by [OpenWISP](https://www.openwisp.org). Furthermore, I'm also supposed to share the challenges I faced during the set-up process as a sort of feedback. I'll be trying be concise in this post so, without further ado, I'm beginning with this post.
 
