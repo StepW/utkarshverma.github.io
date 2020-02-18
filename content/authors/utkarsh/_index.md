@@ -1,11 +1,13 @@
 ---
 name: Utkarsh Verma
 authors:
-- admin
+- utkarsh
 superuser: true
 role: Maker, Writer
-
 bio: A keen maker, programmer and a writer.
+
+headless: true
+type: "widget_page"
 
 interests:
 - Internet of Things

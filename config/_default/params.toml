@@ -1,9 +1,9 @@
 theme = "mr_robot"
-day_night = true
+day_night = false
 font = "traditional serif"
 font_size = "L"
 
-site_type = "Person"
+site_type = "Project"
 description = "A blog about linux, electronics and programming."
 
 # Enable source code highlighting? true/false
