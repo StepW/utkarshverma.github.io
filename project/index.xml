@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Projects | Utkarsh Verma</title>
+    <link>/project/</link>
+      <atom:link href="/project/index.xml" rel="self" type="application/rss+xml" />
+    <description>Projects</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>**© 2018 - 2020 Utkarsh Verma**</copyright>
+    <image>
+      <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
+      <title>Projects</title>
+      <link>/project/</link>
+    </image>
+    
+    <item>
+      <title>BluFi</title>
+      <link>/project/blufi/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/project/blufi/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Convertendo</title>
+      <link>/project/convertendo/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/project/convertendo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ecosia Darker</title>
+      <link>/project/ecosia/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/project/ecosia/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ESPer</title>
+      <link>/project/esper/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/project/esper/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Hugo Dream Plus</title>
+      <link>/project/dream-plus/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/project/dream-plus/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Line Follower Robot</title>
+      <link>/project/lfr/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/project/lfr/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Losant Temp Sensor App</title>
+      <link>/project/mos/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/project/mos/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Yaru Dark Theme for Firefox</title>
+      <link>/project/yaru/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/project/yaru/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

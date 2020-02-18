@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Authors | Utkarsh Verma</title>
+    <link>/authors/</link>
+      <atom:link href="/authors/index.xml" rel="self" type="application/rss+xml" />
+    <description>Authors</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>**© 2018 - 2020 Utkarsh Verma**</copyright><lastBuildDate>Sun, 28 Jan 2018 18:59:43 +0530</lastBuildDate>
+    <image>
+      <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
+      <title>Authors</title>
+      <link>/authors/</link>
+    </image>
+    
+    <item>
+      <title></title>
+      <link>/authors/utkarsh/</link>
+      <pubDate>Sun, 28 Jan 2018 18:59:43 +0530</pubDate>
+      <guid>/authors/utkarsh/</guid>
+      <description>&lt;p&gt;I am a student who likes writing, programming and making stuff. I feel the inner urge to contribute something to the Internet, through which I&amp;rsquo;ve gained most of my skills. Because of this, and alos because I love writing, I started sharing my findings online so as to be helpful to other learners like me. This also opens me to corrections, about my articles, from the readers, which is important since I&amp;rsquo;m a learner as well.&lt;/p&gt;
+&lt;p&gt;As a hobbyist, my online works can be found at the following websites:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;Instructables&lt;/em&gt;: 
+&lt;a href=&#34;https://www.instructables.com/member/UtkarshVerma/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;UtkarshVerma&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;GitHub&lt;/em&gt;: 
+&lt;a href=&#34;https://github.com/UtkarshVerma&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;UtkarshVerma&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Blog&lt;/em&gt;: 
+&lt;a href=&#34;https://utkarshverma.github.io/post/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Personal Blog&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Hackster&lt;/em&gt;: 
+&lt;a href=&#34;https://www.hackster.io/UtkarshVerma&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;UtkarshVerma&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;If you like my works and want more, then you may consider supporting me on 
+&lt;a href=&#34;https://patreon.com/UtkarshVerma&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Patreon&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

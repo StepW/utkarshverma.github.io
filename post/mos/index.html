@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.7.0">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Utkarsh Verma">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Recently I&rsquo;ve got my hands on the craved-for IoT ESP32, thanks to  DFRobot, and have been tinkering with it ever since. I&rsquo;m really amazed by it since it packs both Bluetooth and WiFi in a small yet powerful unit. Since I received the MCU rather than the module, so, to use it, I made myself a breakout board named ESPer(because, why not? 😄). Feel free to check out its Instructable over here.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/post/mos/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="rgb(0, 136, 204)">
+  
+
+  
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-1/css/all.min.css" integrity="sha256-4w9DunooKSr3MFXHXWyFER38WmPdm361bQS/2KUWZbU=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/github.min.css" crossorigin="anonymous" title="hl-light" disabled>
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark">
+        
+      
+    
+
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js" integrity="sha256-Md1qLToewPeKjfAHU1zyPwOutccPAm5tahnaw7Osw0A=" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+        
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.css">
+
+  
+
+
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png">
+
+  <link rel="canonical" href="/post/mos/">
+
+  
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@UtkarshVerma_">
+  <meta property="twitter:creator" content="@UtkarshVerma_">
+  
+  <meta property="og:site_name" content="Utkarsh Verma">
+  <meta property="og:url" content="/post/mos/">
+  <meta property="og:title" content="Mongoose OS on ESPer | Utkarsh Verma">
+  <meta property="og:description" content="Recently I&rsquo;ve got my hands on the craved-for IoT ESP32, thanks to  DFRobot, and have been tinkering with it ever since. I&rsquo;m really amazed by it since it packs both Bluetooth and WiFi in a small yet powerful unit. Since I received the MCU rather than the module, so, to use it, I made myself a breakout board named ESPer(because, why not? 😄). Feel free to check out its Instructable over here."><meta property="og:image" content="/post/mos/featured.jpeg">
+  <meta property="twitter:image" content="/post/mos/featured.jpeg"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2018-01-28T18:59:43&#43;05:30">
+    
+    <meta property="article:modified_time" content="2018-01-28T18:59:43&#43;05:30">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/post/mos/"
+  },
+  "headline": "Mongoose OS on ESPer",
+  
+  "image": [
+    "/post/mos/featured.jpeg"
+  ],
+  
+  "datePublished": "2018-01-28T18:59:43+05:30",
+  "dateModified": "2018-01-28T18:59:43+05:30",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Utkarsh Verma"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Utkarsh Verma",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png"
+    }
+  },
+  "description": "Recently I\u0026rsquo;ve got my hands on the craved-for IoT ESP32, thanks to  DFRobot, and have been tinkering with it ever since. I\u0026rsquo;m really amazed by it since it packs both Bluetooth and WiFi in a small yet powerful unit. Since I received the MCU rather than the module, so, to use it, I made myself a breakout board named ESPer(because, why not? 😄). Feel free to check out its Instructable over here."
+}
+</script>
+
+  
+
+  
+
+
+  
+  
+  
+  
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.1/cookieconsent.min.js" integrity="sha256-5VhCqFam2Cn+yjw61zbBNrbHVJ6SRydPeKopYlngbiQ=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.1/cookieconsent.min.css" integrity="sha256-zQ0LblD/Af8vOppw18+2anxsuaz3pWYyVWi+bTvTH8Q=" crossorigin="anonymous">
+  
+  <script>
+  window.addEventListener("load", function(){
+    window.cookieconsent.initialise({
+      "palette": {
+        "popup": {
+          "background": "rgb(0, 136, 204)",
+          "text": "#fff"
+        },
+        "button": {
+          "background": "#fff",
+          "text": "rgb(0, 136, 204)"
+        }
+      },
+      "theme": "classic",
+      "content": {
+        "message": "This website uses cookies to ensure you get the best experience on our website.",
+        "dismiss": "Got it!",
+        "link": "Learn more",
+        "href": "https://www.cookiesandyou.com"
+      }
+    })});
+  </script>
+
+
+
+  
+
+
+
+
+
+  <title>Mongoose OS on ESPer | Utkarsh Verma</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="dark">
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/">Utkarsh Verma</a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/">Utkarsh Verma</a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>Home</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>Projects</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/files/cv.pdf"><span>CV</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+
+<div class="article-container pt-3">
+  <h1>Mongoose OS on ESPer</h1>
+
+  
+
+  
+
+
+<div class="article-metadata">
+
+  
+  
+  
+  
+  <div>
+    
+
+
+
+  
+  <span><a href="/authors/utkarsh/">Utkarsh Verma</a></span>
+
+  </div>
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Jan 28, 2018
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    5 min read
+  </span>
+  
+
+  
+  
+  
+  <span class="middot-divider"></span>
+  <a href="/post/mos/#disqus_thread"></a>
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/categories/electronics/">electronics</a></span>
+  
+
+</div>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 720px; max-height: 540px;">
+  <div style="position: relative">
+    <img src="/post/mos/featured_hub31f1ac6b26a419d0a97e207ef4a84ba_309627_720x0_resize_q90_lanczos.jpeg" alt="" class="featured-image">
+    
+  </div>
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <p><img src="images/intro-small.jpeg" alt="Intro"></p>
+<p>Recently I&rsquo;ve got my hands on the craved-for IoT <strong>ESP32</strong>, thanks to <strong>
+<a href="https://www.dfrobot.com" target="_blank" rel="noopener">DFRobot</a></strong>, and have been tinkering with it ever since. I&rsquo;m really amazed by it since it packs both <strong>Bluetooth</strong> and <strong>WiFi</strong> in a small yet powerful unit. Since I received the <strong>MCU</strong> rather than the module, so, to use it, I made myself a breakout board named <strong>ESPer</strong>(because, why not? 😄). Feel free to check out its Instructable over 
+<a href="https://www.instructables.com/id/DIY-ESP32-Development-Board-ESPer/" target="_blank" rel="noopener">here</a>.</p>
+<p>So, coming back on track, this post is dedicated on how to use it efficiently via <strong>Mongoose OS</strong>, which in my opinion, is a great firmware to start with for ESP32 beginners, such as me. It provides a good interface for creating, modifying and and uploading code. I think it&rsquo;s biggest feature is that it allows code modification <strong>over the air</strong>(OTA) so that you don&rsquo;t have to flash your device for every small modification.</p>
+<p>Speaking of code, it also supports a variety of languages, including <strong>C++</strong>, <strong>JavaScript</strong> and guess what, <strong>Wiring(Arduino)</strong>. I think that&rsquo;s enough of decribing what Mongoose OS is.</p>
+<p>If you&rsquo;re more curious about Mongoose OS, check out it&rsquo;s official site: 
+<a href="https://www.mongoose-os.com" target="_blank" rel="noopener">Mongoose OS</a>.</p>
+<hr>
+<h1 id="prepping-and-beginning">Prepping and Beginning!</h1>
+<p>To flash your <strong>ESPer</strong> with <strong>Mongoose OS</strong>, you&rsquo;re supposed to have the following things at bay:</p>
+<ul>
+<li>ESPer or ESP32 MCU.</li>
+</ul>
+<blockquote>
+<p>This method will also work if your ESP32 is wired according to the ESPer schematic 
+<a href="https://cdn.instructables.com/FOU/1WS0/JBE12R70/FOU1WS0JBE12R70.LARGE.jpg" target="_blank" rel="noopener">here</a>. The 
+<a href="https://www.dfrobot.com/product-1559.html" target="_blank" rel="noopener">ESP32</a> chip I used!</p>
+</blockquote>
+<ul>
+<li>Arduino(any model) or a USB to TTL Converter</li>
+<li>5 - Jumper Wires</li>
+<li>2 - Breadboards (since ESPer doesn&rsquo;t fit on one)</li>
+</ul>
+<p>That&rsquo;s all for the requirements. Once you&rsquo;re sure you&rsquo;ve got all the stuff, boost ahead!</p>
+<hr>
+<h1 id="installing-the-mos-tool">Installing the mos Tool</h1>
+<p><img src="images/mos.png" alt="mos ui">
+The Mongoose OS website provides an easy-to-use tool for <strong>flashing</strong> and <strong>managing</strong> Mongoose OS on devices. This tool also aids in uploading code and in numerous other tasks.</p>
+<p>The installation instructions have been documented on the official website 
+<a href="https://mongoose-os.com/software.html" target="_blank" rel="noopener">here</a>.
+Since I&rsquo;m using Lubuntu myself, I had to use the following commands:</p>
+<pre><code class="language-bash">$ sudo add-apt-repository ppa:mongoose-os/mos
+$ sudo apt-get update
+$ sudo apt-get install mos
+</code></pre>
+<hr>
+<h1 id="wiring-up-esper">Wiring up ESPer</h1>
+<p><img src="images/wiring.jpg" alt="Wiring Diagram">
+Once the tool is downloaded, wire up your ESPer with any <strong>USB to TTL Converter</strong> since the flashing is to be done via <strong>UART</strong>.</p>
+<p>To keep things applicable to a larger reader-base, I&rsquo;ll be proceeding with my good &lsquo;ol <strong>Arduino UNO</strong>. It&rsquo;s possible to use an Arduino as a <strong>USB to TTL Converter</strong> since it has an in-built <strong>CH340G Converter</strong> which the Arduino uses for programming the ATmega IC.
+Now wire up <strong>ESPer</strong> according to the wiring diagram posted above. Once done it should look something like this.</p>
+<p><img src="images/wiring-real.jpg" alt="ESPer Wired Up"></p>
+<blockquote>
+<p>Be careful while making the <strong>power connections</strong> because ESP32 MCU is <strong>not 5V tolerable</strong> therefore you might end up burning your MCU if you&rsquo;re not careful.</p>
+</blockquote>
+<p>Once that&rsquo;s done, connect your Arduino to your PC or any other device.</p>
+<hr>
+<h1 id="flashing-the-firmware">Flashing the Firmware</h1>
+<p>Now that everything&rsquo;s done, all that&rsquo;s left to do is to flash the firmware onto the ESPer board. To do that:</p>
+<ul>
+<li>Launch the <strong>mos tool</strong>. In my case, that is Linux, it is opened by entering <code>mos</code> in the terminal. This will open up the <strong>mos Web UI</strong> in your web browser.
+<img src="images/device.png" alt="Device Configuration"></li>
+<li>In the UI, set the <strong>Arduino Serial Port</strong>, device as <strong>esp32</strong> and an app of your choice. Then click on <code>Flash</code>.
+<img src="images/flash.png" alt="Flashing"></li>
+<li>After a few moments, the UI will <strong>attempt to connect</strong> to the device. In this interval, you&rsquo;ll have to get off from your keyboard to the ESPer board. To connect the device to the UI, we&rsquo;ll have to make it enter <strong>Download Mode</strong>. This is done by pressing and holding the <strong>Boot</strong> button, and then the <strong>Reset</strong> button. After a second, release the <strong>Reset</strong> button first and then the <strong>Boot</strong> button. You&rsquo;ll see that the UI will have begun the flashing process by then.</li>
+<li>Once the message <strong>&ldquo;All done&rdquo;</strong> pops up in the console. Close the web browser and terminate the <code>mos</code> command by pressing <code>Ctrl+C</code> in the terminal.</li>
+</ul>
+<p>This concludes the flashing process.</p>
+<hr>
+<h1 id="configuring-the-wifi-settings">Configuring the WiFi Settings</h1>
+<p><img src="images/wifi.png" alt="WiFi">
+So we have flashed the Mongoose OS firmware in our ESPer board now, but we still haven&rsquo;t configured the <strong>WiFi Settings</strong> which is the most important feature of IoT devices since they have to be connected to the internet. To configure WiFi:</p>
+<ul>
+<li>Press the <strong>Reset</strong> button on the ESPer board. Wait for a minute or so to let the MCU boot up.</li>
+<li>Launch the <strong>mos tool</strong> again and select your <strong>Arduino Serial Port</strong>. You&rsquo;ll notice that the UI automatically detects that the Mongoose OS firmware is installed on the device and asks you to enter the WiFi settings.</li>
+<li>Enter the WiFi settings and that&rsquo;s it.</li>
+</ul>
+<hr>
+<h1 id="the-skys-the-limit">The Sky&rsquo;s the Limit</h1>
+<p>Now that you&rsquo;ve installed an OS on your ESPer board or ESP32, you can do almost anything with it, be it a <strong>mini Arduino</strong> or a <strong>WiFi server</strong>, you name it. So go ahead and start coding and making. The video below shows my ESPer flashed with the
+<strong>Blink Code</strong>.</p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/wEwncJ5RnA0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<blockquote>
+<p>The video was recorded before this post was published that is why there is no silkscreen on the ESPer board.</p>
+</blockquote>
+<p>So that&rsquo;s how you install <strong>Mongoose OS</strong> on your <strong>ESPer</strong> board. You may refer to the official documentation to get acquainted with the UI and use it effectively in your projects. This is the link: 
+<a href="https://mongoose-os.com/docs/" target="_blank" rel="noopener">Mongoose OS Documentation</a></p>
+<p>If you feel that I missed something, please use the <strong>Disqus Comments</strong> below to let me know. Same goes for the improvement suggestions.</p>
+<p>A huge thanks to <strong>
+<a href="https://www.dfrobot.com" target="_blank" rel="noopener">DFRobot</a></strong> for sending me awesome stuff.</p>
+<p>Thanks for reading!  😀</p>
+<p><strong>Keep Making!</strong></p>
+
+    </div>
+
+    
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tags/iot/">iot</a>
+  
+  <a class="badge badge-light" href="/tags/esp32/">esp32</a>
+  
+  <a class="badge badge-light" href="/tags/mongoose-os/">mongoose os</a>
+  
+</div>
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/post/mos/&amp;text=Mongoose%20OS%20on%20ESPer" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/post/mos/&amp;t=Mongoose%20OS%20on%20ESPer" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=Mongoose%20OS%20on%20ESPer&amp;body=/post/mos/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/post/mos/&amp;title=Mongoose%20OS%20on%20ESPer" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=Mongoose%20OS%20on%20ESPer%20/post/mos/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/post/mos/&amp;title=Mongoose%20OS%20on%20ESPer" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <img class="avatar mr-3 avatar-circle" src="/authors/utkarsh/avatar_hu6977ca6bf049ef0aac189df3d30e3e26_225274_270x270_fill_q90_lanczos_center.jpeg" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="/authors/utkarsh/">Utkarsh Verma</a></h5>
+      <h6 class="card-subtitle">Maker, Writer</h6>
+      <p class="card-text">A keen maker, programmer and a writer.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+    <li>
+      <a href="mailto:utkarshverma@protonmail.com" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/UtkarshVerma" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/UtkarshVerma_" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.linkedin.com/in/utkarshvermai/" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/files/cv.pdf" >
+        <i class="ai ai-cv"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+<section id="comments">
+  
+    
+<div id="disqus_thread"></div>
+<script>
+  let disqus_config = function () {
+    
+    
+    
+  };
+  (function() {
+    if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+      document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+      return;
+    }
+    var d = document, s = d.createElement('script'); s.async = true;
+    s.src = 'https://' + "utkarshvermablog" + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+  
+</section>
+
+
+
+
+
+
+  
+  
+
+
+
+  </div>
+</article>
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js" integrity="sha256-1zu+3BnLYV9LdiY85uXMzii3bdrkelyp37e0ZyTAQh0=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/r.min.js"></script>
+        
+      
+
+    
+
+    
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    <script>const isSiteThemeDark = true;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    <script id="dsq-count-scr" src="https://utkarshvermablog.disqus.com/count.js" async></script>
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.a8d7005002cb4a052fd6d721e83df9ba.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    <strong>© 2018 - 2020 Utkarsh Verma</strong> &middot; 
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

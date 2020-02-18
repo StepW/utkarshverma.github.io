@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>iot | Utkarsh Verma</title>
+    <link>/tags/iot/</link>
+      <atom:link href="/tags/iot/index.xml" rel="self" type="application/rss+xml" />
+    <description>iot</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>**© 2018 - 2020 Utkarsh Verma**</copyright><lastBuildDate>Sun, 28 Jan 2018 18:59:43 +0530</lastBuildDate>
+    <image>
+      <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
+      <title>iot</title>
+      <link>/tags/iot/</link>
+    </image>
+    
+    <item>
+      <title>Mongoose OS on ESPer</title>
+      <link>/post/mos/</link>
+      <pubDate>Sun, 28 Jan 2018 18:59:43 +0530</pubDate>
+      <guid>/post/mos/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;images/intro-small.jpeg&#34; alt=&#34;Intro&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Recently I&amp;rsquo;ve got my hands on the craved-for IoT &lt;strong&gt;ESP32&lt;/strong&gt;, thanks to &lt;strong&gt;
+&lt;a href=&#34;https://www.dfrobot.com&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;DFRobot&lt;/a&gt;&lt;/strong&gt;, and have been tinkering with it ever since. I&amp;rsquo;m really amazed by it since it packs both &lt;strong&gt;Bluetooth&lt;/strong&gt; and &lt;strong&gt;WiFi&lt;/strong&gt; in a small yet powerful unit. Since I received the &lt;strong&gt;MCU&lt;/strong&gt; rather than the module, so, to use it, I made myself a breakout board named &lt;strong&gt;ESPer&lt;/strong&gt;(because, why not? 😄). Feel free to check out its Instructable over 
+&lt;a href=&#34;https://www.instructables.com/id/DIY-ESP32-Development-Board-ESPer/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;So, coming back on track, this post is dedicated on how to use it efficiently via &lt;strong&gt;Mongoose OS&lt;/strong&gt;, which in my opinion, is a great firmware to start with for ESP32 beginners, such as me. It provides a good interface for creating, modifying and and uploading code. I think it&amp;rsquo;s biggest feature is that it allows code modification &lt;strong&gt;over the air&lt;/strong&gt;(OTA) so that you don&amp;rsquo;t have to flash your device for every small modification.&lt;/p&gt;
+&lt;p&gt;Speaking of code, it also supports a variety of languages, including &lt;strong&gt;C++&lt;/strong&gt;, &lt;strong&gt;JavaScript&lt;/strong&gt; and guess what, &lt;strong&gt;Wiring(Arduino)&lt;/strong&gt;. I think that&amp;rsquo;s enough of decribing what Mongoose OS is.&lt;/p&gt;
+&lt;p&gt;If you&amp;rsquo;re more curious about Mongoose OS, check out it&amp;rsquo;s official site: 
+&lt;a href=&#34;https://www.mongoose-os.com&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Mongoose OS&lt;/a&gt;.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;prepping-and-beginning&#34;&gt;Prepping and Beginning!&lt;/h1&gt;
+&lt;p&gt;To flash your &lt;strong&gt;ESPer&lt;/strong&gt; with &lt;strong&gt;Mongoose OS&lt;/strong&gt;, you&amp;rsquo;re supposed to have the following things at bay:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;ESPer or ESP32 MCU.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;This method will also work if your ESP32 is wired according to the ESPer schematic 
+&lt;a href=&#34;https://cdn.instructables.com/FOU/1WS0/JBE12R70/FOU1WS0JBE12R70.LARGE.jpg&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;. The 
+&lt;a href=&#34;https://www.dfrobot.com/product-1559.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;ESP32&lt;/a&gt; chip I used!&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;Arduino(any model) or a USB to TTL Converter&lt;/li&gt;
+&lt;li&gt;5 - Jumper Wires&lt;/li&gt;
+&lt;li&gt;2 - Breadboards (since ESPer doesn&amp;rsquo;t fit on one)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;That&amp;rsquo;s all for the requirements. Once you&amp;rsquo;re sure you&amp;rsquo;ve got all the stuff, boost ahead!&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;installing-the-mos-tool&#34;&gt;Installing the mos Tool&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&#34;images/mos.png&#34; alt=&#34;mos ui&#34;&gt;
+The Mongoose OS website provides an easy-to-use tool for &lt;strong&gt;flashing&lt;/strong&gt; and &lt;strong&gt;managing&lt;/strong&gt; Mongoose OS on devices. This tool also aids in uploading code and in numerous other tasks.&lt;/p&gt;
+&lt;p&gt;The installation instructions have been documented on the official website 
+&lt;a href=&#34;https://mongoose-os.com/software.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;.
+Since I&amp;rsquo;m using Lubuntu myself, I had to use the following commands:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ sudo add-apt-repository ppa:mongoose-os/mos
+$ sudo apt-get update
+$ sudo apt-get install mos
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;wiring-up-esper&#34;&gt;Wiring up ESPer&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&#34;images/wiring.jpg&#34; alt=&#34;Wiring Diagram&#34;&gt;
+Once the tool is downloaded, wire up your ESPer with any &lt;strong&gt;USB to TTL Converter&lt;/strong&gt; since the flashing is to be done via &lt;strong&gt;UART&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;To keep things applicable to a larger reader-base, I&amp;rsquo;ll be proceeding with my good &amp;lsquo;ol &lt;strong&gt;Arduino UNO&lt;/strong&gt;. It&amp;rsquo;s possible to use an Arduino as a &lt;strong&gt;USB to TTL Converter&lt;/strong&gt; since it has an in-built &lt;strong&gt;CH340G Converter&lt;/strong&gt; which the Arduino uses for programming the ATmega IC.
+Now wire up &lt;strong&gt;ESPer&lt;/strong&gt; according to the wiring diagram posted above. Once done it should look something like this.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;images/wiring-real.jpg&#34; alt=&#34;ESPer Wired Up&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Be careful while making the &lt;strong&gt;power connections&lt;/strong&gt; because ESP32 MCU is &lt;strong&gt;not 5V tolerable&lt;/strong&gt; therefore you might end up burning your MCU if you&amp;rsquo;re not careful.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Once that&amp;rsquo;s done, connect your Arduino to your PC or any other device.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;flashing-the-firmware&#34;&gt;Flashing the Firmware&lt;/h1&gt;
+&lt;p&gt;Now that everything&amp;rsquo;s done, all that&amp;rsquo;s left to do is to flash the firmware onto the ESPer board. To do that:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Launch the &lt;strong&gt;mos tool&lt;/strong&gt;. In my case, that is Linux, it is opened by entering &lt;code&gt;mos&lt;/code&gt; in the terminal. This will open up the &lt;strong&gt;mos Web UI&lt;/strong&gt; in your web browser.
+&lt;img src=&#34;images/device.png&#34; alt=&#34;Device Configuration&#34;&gt;&lt;/li&gt;
+&lt;li&gt;In the UI, set the &lt;strong&gt;Arduino Serial Port&lt;/strong&gt;, device as &lt;strong&gt;esp32&lt;/strong&gt; and an app of your choice. Then click on &lt;code&gt;Flash&lt;/code&gt;.
+&lt;img src=&#34;images/flash.png&#34; alt=&#34;Flashing&#34;&gt;&lt;/li&gt;
+&lt;li&gt;After a few moments, the UI will &lt;strong&gt;attempt to connect&lt;/strong&gt; to the device. In this interval, you&amp;rsquo;ll have to get off from your keyboard to the ESPer board. To connect the device to the UI, we&amp;rsquo;ll have to make it enter &lt;strong&gt;Download Mode&lt;/strong&gt;. This is done by pressing and holding the &lt;strong&gt;Boot&lt;/strong&gt; button, and then the &lt;strong&gt;Reset&lt;/strong&gt; button. After a second, release the &lt;strong&gt;Reset&lt;/strong&gt; button first and then the &lt;strong&gt;Boot&lt;/strong&gt; button. You&amp;rsquo;ll see that the UI will have begun the flashing process by then.&lt;/li&gt;
+&lt;li&gt;Once the message &lt;strong&gt;&amp;ldquo;All done&amp;rdquo;&lt;/strong&gt; pops up in the console. Close the web browser and terminate the &lt;code&gt;mos&lt;/code&gt; command by pressing &lt;code&gt;Ctrl+C&lt;/code&gt; in the terminal.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This concludes the flashing process.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;configuring-the-wifi-settings&#34;&gt;Configuring the WiFi Settings&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&#34;images/wifi.png&#34; alt=&#34;WiFi&#34;&gt;
+So we have flashed the Mongoose OS firmware in our ESPer board now, but we still haven&amp;rsquo;t configured the &lt;strong&gt;WiFi Settings&lt;/strong&gt; which is the most important feature of IoT devices since they have to be connected to the internet. To configure WiFi:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Press the &lt;strong&gt;Reset&lt;/strong&gt; button on the ESPer board. Wait for a minute or so to let the MCU boot up.&lt;/li&gt;
+&lt;li&gt;Launch the &lt;strong&gt;mos tool&lt;/strong&gt; again and select your &lt;strong&gt;Arduino Serial Port&lt;/strong&gt;. You&amp;rsquo;ll notice that the UI automatically detects that the Mongoose OS firmware is installed on the device and asks you to enter the WiFi settings.&lt;/li&gt;
+&lt;li&gt;Enter the WiFi settings and that&amp;rsquo;s it.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;the-skys-the-limit&#34;&gt;The Sky&amp;rsquo;s the Limit&lt;/h1&gt;
+&lt;p&gt;Now that you&amp;rsquo;ve installed an OS on your ESPer board or ESP32, you can do almost anything with it, be it a &lt;strong&gt;mini Arduino&lt;/strong&gt; or a &lt;strong&gt;WiFi server&lt;/strong&gt;, you name it. So go ahead and start coding and making. The video below shows my ESPer flashed with the
+&lt;strong&gt;Blink Code&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;https://www.youtube.com/embed/wEwncJ5RnA0&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;The video was recorded before this post was published that is why there is no silkscreen on the ESPer board.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;So that&amp;rsquo;s how you install &lt;strong&gt;Mongoose OS&lt;/strong&gt; on your &lt;strong&gt;ESPer&lt;/strong&gt; board. You may refer to the official documentation to get acquainted with the UI and use it effectively in your projects. This is the link: 
+&lt;a href=&#34;https://mongoose-os.com/docs/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Mongoose OS Documentation&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;If you feel that I missed something, please use the &lt;strong&gt;Disqus Comments&lt;/strong&gt; below to let me know. Same goes for the improvement suggestions.&lt;/p&gt;
+&lt;p&gt;A huge thanks to &lt;strong&gt;
+&lt;a href=&#34;https://www.dfrobot.com&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;DFRobot&lt;/a&gt;&lt;/strong&gt; for sending me awesome stuff.&lt;/p&gt;
+&lt;p&gt;Thanks for reading!  😀&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Keep Making!&lt;/strong&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
