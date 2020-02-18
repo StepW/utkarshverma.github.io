@@ -18,6 +18,7 @@ deploy:
   repo: UtkarshVerma/utkarshverma.github.io
   github-token: "$GITHUB_TOKEN"
   local-dir: public
+  target_branch: master
   skip-cleanup: true
   keep-history: true
   on:
