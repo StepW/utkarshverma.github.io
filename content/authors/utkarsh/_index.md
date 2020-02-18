@@ -16,7 +16,7 @@ education:
   courses:
   - course: B.Tech in Electronics and Communication Engineering
     institution: Indian Institute of Information Technology, Design and Manufacuring, Kancheepuram
-    year: 2019
+    year: 2019 - Present
 
 social:
 - icon: envelope
