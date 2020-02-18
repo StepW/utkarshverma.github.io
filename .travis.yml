@@ -15,7 +15,7 @@ script:
 - hugo --config "$config"
 deploy:
 - provider: pages
-  repo: UtkarshVerma/blog
+  repo: UtkarshVerma/utkarshverma.github.io
   github-token: "$GITHUB_TOKEN"
   local-dir: public
   skip-cleanup: true
