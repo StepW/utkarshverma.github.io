@@ -1,0 +1,79 @@
+theme = "mr_robot"
+day_night = true
+font = "traditional serif"
+font_size = "L"
+
+site_type = "Person"
+description = "A blog about linux, electronics and programming."
+
+# Enable source code highlighting? true/false
+# Documentation: https://sourcethemes.com/academic/docs/writing-markdown-latex/#highlighting-options
+highlight = true
+highlight_languages = ["r"]  # Add support for highlighting additional languages
+# highlight_style = "github"  # For supported styles, see https://cdnjs.com/libraries/highlight.js/
+math = false
+diagram = false
+
+# Privacy pack
+#   Show a cookie consent message to visitors
+#   Anonymize IP in Google Analytics (if enabled)
+privacy_pack = true
+
+email = "utkarshverma@protonmail.com"
+phone = ""
+contact_links = [
+  {icon = "twitter", icon_pack = "fab", name = "DM Me", link = "https://twitter.com/@UtkarshVerma_"},
+  {icon = "keybase", icon_pack = "fab", name = "Chat on Keybase", link = "https://keybase.io/UtkarshVerma"},
+  {icon = "comments", icon_pack = "fas", name = "Discuss on Forum", link = "https://discourse.gohugo.io/UtkarshVerma_"},
+  {icon = "telegram", icon_pack = "fab", name = "Telegram Me", link = "https://telegram.me/UtkarshVerma"}
+  ]
+
+# Default image for social sharing and search engines. Place image in `static/img/` folder and specify image name here.
+sharing_image = ""
+
+twitter = "UtkarshVerma_"
+
+date_format = "Jan 2, 2006"
+time_format = "3:04 PM"
+
+# Main menu alignment (l = left, c = center, r = right) and logo options.
+main_menu = {align = "l", show_logo = true}
+reading_time = true
+
+# Display next/previous section pager? (true/false)
+section_pager = false
+docs_section_pager = true  # Display pager in Docs layout (e.g. tutorials)?
+
+sharing = true
+link_authors = true
+
+[avatar]
+  gravatar = false
+  shape = "circle"
+
+# Configuration of project pages.
+[projects]
+  # Views for associated content.
+  #   1: List
+  #   2: Compact
+  #   3: Card
+  #   4: Citation (publications only)
+  post_view = 2
+  publication_view = 2
+  talk_view = 2
+
+[comments]
+  engine = 1
+
+  commentable = {page = true, post = true, docs = true, project = true, publication = true, talk = true}
+
+  [comments.disqus]
+    shortname = "utkarshvermablog"
+    show_count = true
+
+[search]
+  engine = 1
+
+[marketing]
+  google_analytics = ""
+  google_tag_manager = ""
