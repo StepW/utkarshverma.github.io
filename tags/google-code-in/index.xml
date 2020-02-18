@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>google code in | Utkarsh Verma</title>
+    <link>/tags/google-code-in/</link>
+      <atom:link href="/tags/google-code-in/index.xml" rel="self" type="application/rss+xml" />
+    <description>google code in</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>**© 2018 - 2020 Utkarsh Verma**</copyright><lastBuildDate>Sun, 14 Jan 2018 08:58:40 +0000</lastBuildDate>
+    <image>
+      <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
+      <title>google code in</title>
+      <link>/tags/google-code-in/</link>
+    </image>
+    
+    <item>
+      <title>Testing &#34;django-netjsonconfig&#34;</title>
+      <link>/post/netjsonconfig/</link>
+      <pubDate>Sun, 14 Jan 2018 08:58:40 +0000</pubDate>
+      <guid>/post/netjsonconfig/</guid>
+      <description>&lt;p&gt;A task came up in Google Code-in which asked me to install the 
+&lt;a href=&#34;https://github.com/openwisp/django-netjsonconfig&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;django-netjsonconfig&lt;/a&gt; module by 
+&lt;a href=&#34;https://www.openwisp.org&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;OpenWISP&lt;/a&gt;. Furthermore, I&amp;rsquo;m also supposed to share the challenges I faced during the set-up process as a sort of feedback. I&amp;rsquo;ll be trying be concise in this post so, without further ado, I&amp;rsquo;m beginning with this post.&lt;/p&gt;
+&lt;h1 id=&#34;installing-django-netjsonconfig&#34;&gt;Installing &amp;ldquo;django-netjsonconfig&amp;rdquo;&lt;/h1&gt;
+&lt;p&gt;The installation instructions for this this module have been well-documented on its 
+&lt;a href=&#34;https://github.com/openwisp/django-netjsonconfig#installing-for-development&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;GitHub repository&lt;/a&gt;. So I began the installation by creating a &lt;strong&gt;Python 2.7 Virtual Environment&lt;/strong&gt; using &lt;code&gt;python2 -m virtualenv py2&lt;/code&gt; for the sake of cleanliness on my local machine. I chose &lt;code&gt;python2&lt;/code&gt; for since for this since I was also on the lookout for bugs in the module and most of the bugs seem to be related with it since it&amp;rsquo;s a bit outdated now.&lt;br&gt;
+I then activated the &lt;code&gt;virtualenv&lt;/code&gt; and started entering the installation commands according to the instructions in the repository. Everything went on smoothly until the &lt;code&gt;python setup.py develop&lt;/code&gt; command. I got an error as shown in the below picture.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;images/django2.png&#34; alt=&#34;develop failed&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Clearly, the error suggests that &lt;strong&gt;Django v2.0.1&lt;/strong&gt; was being downloaded which &lt;strong&gt;isn&amp;rsquo;t supported&lt;/strong&gt; by &lt;strong&gt;Python 2.7&lt;/strong&gt;. A bit of browsing led me to the conclusion that the &lt;code&gt;setup.py&lt;/code&gt; needed to be modified to download &lt;strong&gt;older Django versions&lt;/strong&gt; for Python 2.7. So, I added a simple &lt;code&gt;if-else&lt;/code&gt; block to the django installation statement as shown in the picture.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;images/my-fix.png&#34; alt=&#34;setup.py fix&#34;&gt;&lt;/p&gt;
+&lt;p&gt;If you&amp;rsquo;re curious about my fix,  this is the 
+&lt;a href=&#34;https://github.com/UtkarshVerma/django-netjsonconfig/commit/1575acbbc719e539cd8ecbffc761d8b9c2023d56&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;link&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Here, what&amp;rsquo;s being done is basically:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Detect &lt;code&gt;python&lt;/code&gt; version used for installation using &lt;code&gt;sys.version_info[0]&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Install older Django versions if &lt;code&gt;sys.version_info[0]&amp;lt;3&lt;/code&gt;, that is &lt;code&gt;python2&lt;/code&gt; is detected.&lt;/li&gt;
+&lt;li&gt;Install latest version if above condition isn&amp;rsquo;t satisfied, that is &lt;code&gt;python3&lt;/code&gt; is detected.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I also had to remove the django installation line from &lt;code&gt;requirements.txt&lt;/code&gt; since &lt;code&gt;setup.py&lt;/code&gt; was fetching the requirement names from there. After applying this fix, I re-ran the &lt;code&gt;python setup.py develop&lt;/code&gt; command and there it was! The sweet smell of success. Now an &lt;strong&gt;older yet python2 compatible&lt;/strong&gt; version of &lt;strong&gt;Django&lt;/strong&gt; was being installed when using &lt;code&gt;python2&lt;/code&gt; as clearly shown in one of the pictures below:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;images/django-v-fixed.png&#34; alt=&#34;Older Django being downloaded&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;images/Success!.png&#34; alt=&#34;Successful!&#34;&gt;&lt;/p&gt;
+&lt;p&gt;After this, I installed some more requirements using &lt;code&gt;pip install -r requirements-test.txt&lt;/code&gt;
+This was how I&amp;rsquo;d finished installing &lt;code&gt;django-netjsonconfig&lt;/code&gt; using Python2. Now all that was left to do was to to do the migrations and run the server.&lt;/p&gt;
+&lt;h1 id=&#34;making-migrations-and-creating-a-superuser&#34;&gt;Making Migrations and Creating a superuser&lt;/h1&gt;
+&lt;p&gt;By referring to the instructions on the repo again, I opened the &lt;code&gt;tests&lt;/code&gt; directory,
+did the migrations using &lt;code&gt;./manage.py migrate&lt;/code&gt;. It was really satisfying to see all the CLI responses coloured in &lt;strong&gt;green&lt;/strong&gt;. 😄
+&lt;img src=&#34;images/migrate.png&#34; alt=&#34;Migrate&#34;&gt;&lt;/p&gt;
+&lt;p&gt;After that, there was the superuser creation using &lt;code&gt;./manage.py createsuperuser&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;images/superuser.png&#34; alt=&#34;Superuser creation&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;running-the-test-server&#34;&gt;Running the Test Server&lt;/h1&gt;
+&lt;p&gt;I started the test server using &lt;code&gt;./manage.py runserver&lt;/code&gt; and it was successful.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;images/up-and-running.png&#34; alt=&#34;Server Up and Running!&#34;&gt;&lt;/p&gt;
+&lt;p&gt;I could also now visit the server at 
+&lt;a href=&#34;http://localhost/admin&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;http://localhost:8000/admin&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;images/logged-in.png&#34; alt=&#34;Logged In&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h1&gt;
+&lt;p&gt;So, that&amp;rsquo;s how I installed the &lt;strong&gt;django-netjsonconfig&lt;/strong&gt; module. Also, I&amp;rsquo;ve commited my fixes to my &lt;strong&gt;forked repo&lt;/strong&gt; 
+&lt;a href=&#34;https://github.com/UtkarshVerma/django-netjsonconfig&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;. Here&amp;rsquo;s the 
+&lt;a href=&#34;https://github.com/openwisp/django-netjsonconfig/pull/71&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;link to my pull request&lt;/a&gt;. That concludes this post.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Google Code-in with OpenWISP</title>
+      <link>/post/gci/</link>
+      <pubDate>Sat, 13 Jan 2018 10:29:23 +0530</pubDate>
+      <guid>/post/gci/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;images/gci-wide.png&#34; alt=&#34;GCI&#34;&gt;Recently I&amp;rsquo;ve been participating in 
+&lt;a href=&#34;https://codein.withgoogle.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Google Code-in&lt;/a&gt; which is Google&amp;rsquo;s initiative to introduce young minds to the concept of &lt;strong&gt;FOSS&lt;/strong&gt;, that is &lt;strong&gt;Free or Open-Source Softwares&lt;/strong&gt;. This post is for sharing my experiences with GCI, as the title suggests. So let&amp;rsquo;s just get on it.&lt;/p&gt;
+&lt;p&gt;It all began while I was returning from an outing on &lt;strong&gt;5 December, 2017&lt;/strong&gt; and was searching the internet for 
+&lt;a href=&#34;https://www.googlesciencefair.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Google Science Fair&lt;/a&gt; to check if I could participate in it or not. When I searched it and scrolled down, I saw a link for &lt;strong&gt;Google Code-in&lt;/strong&gt;. The very combination of the words &lt;em&gt;Google&lt;/em&gt; and &lt;em&gt;Code&lt;/em&gt; had raised my adrenaline levels and so I starting reading about it and after a few moments, I had decided to participate in it. Soon I had my father fill up the &lt;strong&gt;Parental Consent&lt;/strong&gt; and I was ready to begin.&lt;/p&gt;
+&lt;p&gt;Being a total beginner with this contest and with the concepts of &lt;strong&gt;FOSS&lt;/strong&gt;, I had a lot to learn, and I was aware of that. So after a few days of jumping from one organization to the other, I was finally able to settle at 
+&lt;a href=&#34;https://www.openwisp.org&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;OpenWISP&lt;/a&gt;. This was thankfully possible due to my chat on their 
+&lt;a href=&#34;https://gitter.im/openwisp/general&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Gitter room&lt;/a&gt; with one of their mentors. It also gave me the confidence to proceed ahead with my skill-set and so I began doing the tasks provided by this organisation.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;the-things-ive-learnt&#34;&gt;The Things I&amp;rsquo;ve Learnt:&lt;/h1&gt;
+&lt;p&gt;Being a participant of GCI, I have learned a lot of things.Here are the few of the many things which I&amp;rsquo;ve learn&amp;rsquo;t till date, thanks to &lt;strong&gt;OpenWISP&lt;/strong&gt;(I&amp;rsquo;m still learning more 😉):&lt;/p&gt;
+&lt;h2 id=&#34;1-linux-command-line&#34;&gt;1. Linux Command Line&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;images/linux.png&#34; alt=&#34;Screenshot of Lubntu&#34;&gt;
+Ever since the beginning of GCI, I&amp;rsquo;ve been using &lt;strong&gt;Lubuntu&lt;/strong&gt; for doing almost everything. Be it &lt;strong&gt;installing packages&lt;/strong&gt;, &lt;strong&gt;setting up a virtual machine&lt;/strong&gt;, &lt;strong&gt;creating a webpage&lt;/strong&gt;, &lt;strong&gt;using GitHub&lt;/strong&gt; or &lt;strong&gt;hosting a local server&lt;/strong&gt;, I&amp;rsquo;ve got so used to the quick and efficient CLI of Linux now that I&amp;rsquo;ve developed a sort of disgust for using the mouse. I&amp;rsquo;ve also acquired great details about popularly used &lt;strong&gt;shell commands&lt;/strong&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;2-git-and-github&#34;&gt;2. git and GitHub&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;images/git.png&#34; alt=&#34;Pushing commits using git&#34;&gt;&lt;/p&gt;
+&lt;p&gt;GitHub is the basic need of any developer/maker who intends to share his/her work online. I&amp;rsquo;m also very fond of the working of GitHub. It allows easy sharing, modifications and contributions to projects through the usage of &lt;strong&gt;clones&lt;/strong&gt; and &lt;strong&gt;pull requests&lt;/strong&gt; . Since &lt;strong&gt;OpenWISP&lt;/strong&gt; is also on GitHub(which open-source organisation isn&amp;rsquo;t nowadays? 😄), there have been a lot of tasks involving GitHub. Doing those tasks has increased my knowledge tenfold and I&amp;rsquo;m now very comfortable with using &lt;strong&gt;git&lt;/strong&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;3-virtual-machines&#34;&gt;3. Virtual Machines&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;images/virtualbox.png&#34; alt=&#34;VirtualBox running Ubuntu Server 14.04&#34;&gt;
+There are some times when a software isn&amp;rsquo;t compatible with the OS you&amp;rsquo;ve installed. In that case, it&amp;rsquo;s a good idea to use &lt;strong&gt;virtual machines&lt;/strong&gt; or &lt;strong&gt;VMs&lt;/strong&gt; rather than installing a whole new OS. I already had a bit of experiences with VMs but I never went deep. While doing some tasks, I&amp;rsquo;ve learned a few handy things to perform with VMs such as &lt;strong&gt;configuring the network settings&lt;/strong&gt;, &lt;strong&gt;passing commands remotely using SSH&lt;/strong&gt; and &lt;strong&gt;using them as disposable local webservers&lt;/strong&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;4-python&#34;&gt;4. Python&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;images/virtualenv.png&#34; alt=&#34;virtualenv Creation using Python&#34;&gt;
+I had been thinking about learning &lt;strong&gt;Python&lt;/strong&gt; since it&amp;rsquo;s getting more and more popular nowadays, but I could never get rid of my hesitation that &amp;ldquo;Python a whole new language&amp;rdquo; since I only had exposure to Java. But the tasks that &lt;strong&gt;OpenWISP&lt;/strong&gt; provided in Google Code-in rid me of this hesitation of mine. Once I began reading about it, I found out how similar it is to Java and have therefore started practising it now and hope that I might be able to master it someday. I&amp;rsquo;ve learnt how to install python modules, how to interpret error messages, and using &lt;code&gt;virtualenv&lt;/code&gt; for isolated working area.&lt;/p&gt;
+&lt;h2 id=&#34;5-web-programming&#34;&gt;5. Web Programming&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;images/website.png&#34; alt=&#34;The first site I created using Django&#34;&gt;
+Just like Python, I had the same hesitation with web programming as well. But one task in GCI removed this hesitation. That specific task required me to create my own website using &lt;strong&gt;Django&lt;/strong&gt; and guess what, &lt;strong&gt;python!&lt;/strong&gt; As much as I remember it took me two whole days to understand what I had to do and then I created it. If you&amp;rsquo;re curious about that site of mine, 
+&lt;a href=&#34;https://utkarshverma.pythonanywhere.com&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&amp;rsquo;s the link&lt;/a&gt; to it. I also can&amp;rsquo;t proceed without referencing to the tutorial &lt;strong&gt;OpenWISP&lt;/strong&gt; referred to me since the authors(
+&lt;a href=&#34;https://twitter.com/djangogirls&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;DjangoGirls&lt;/a&gt;) have done a great job. 
+&lt;a href=&#34;https://tutorial.djangogirls.org&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Here&amp;rsquo;s the link!&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;6-css--html&#34;&gt;6. CSS &amp;amp; HTML&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;images/css-html.png&#34; alt=&#34;Inspecting the site&#34;&gt;
+The same tutorial which taught &lt;strong&gt;Django&lt;/strong&gt; also introduced me to the concepts of CSS. After having learn&amp;rsquo;t a bit of CSS, I wanted to test it out. A task in GCI required me to review a &lt;strong&gt;pull request&lt;/strong&gt; of another fellow GCI student. I thought of it as an opportunity and 
+&lt;a href=&#34;https://brainbuzzer.github.io/OpenWISP-Website/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&amp;rsquo;s&lt;/a&gt; the results of my &lt;strong&gt;CSS &amp;amp; HTML coding&lt;/strong&gt;. I helped 
+&lt;a href=&#34;https://github.com/BrainBuzzer&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;@BrainBuzzer&lt;/a&gt; in creating this website by adding some HTML pages and some other stuff. They are stated 
+&lt;a href=&#34;https://github.com/BrainBuzzer/OpenWISP-Website/pull/1&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;. By the way, the website was supposed to be a &lt;strong&gt;thanks to OpenWISP and mostly its mentors&lt;/strong&gt; for their guidance.&lt;/p&gt;
+&lt;h2 id=&#34;7-creating-properly-formatted-python-and-yaml-script-files&#34;&gt;7. Creating Properly Formatted Python and YAML Script Files&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;images/yaml.png&#34; alt=&#34;A basic .yml file&#34;&gt;
+A few of my tasks required me to use &lt;strong&gt;python&lt;/strong&gt; and &lt;strong&gt;YAML&lt;/strong&gt; scripts. Since my PC is a bit outdated and it can&amp;rsquo;t run high-end editing softwares such as &lt;strong&gt;Atom&lt;/strong&gt; smoothly, I was stuck with Lubuntu&amp;rsquo;s in-built text editor &lt;strong&gt;Leafpad&lt;/strong&gt;. Initially it was a bit hard for me to format my scripts properly but after a few tries, I seem to have learnt it.&lt;/p&gt;
+&lt;h2 id=&#34;8-markdown&#34;&gt;8. Markdown&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;images/markdown.png&#34; alt=&#34;A basic MarkDown example&#34;&gt;
+GitHub uses this markup language for text formatting. Since it is used almost everywhere, from &lt;strong&gt;Gitter&lt;/strong&gt; to &lt;strong&gt;Comments in GitHub&lt;/strong&gt; and even in &lt;strong&gt;GitHub Pages&lt;/strong&gt;, it didn&amp;rsquo;t take me long to get acquainted with it. FYI, this post is also written using &lt;strong&gt;Markdown&lt;/strong&gt; on 
+&lt;a href=&#34;https://dillinger.io&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Dillinger&lt;/a&gt;. The picture above shows a code snippet of Markdown.&lt;/p&gt;
+&lt;h2 id=&#34;9-creating-restful-apis-with-python--django&#34;&gt;9. Creating RESTful APIs with Python &amp;amp; Django&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;images/restful-api.jpg&#34; alt=&#34;RESTful API&#34;&gt;
+There was also a task in GCI for completion of which, I had to create a &lt;strong&gt;RESTful API&lt;/strong&gt; for my local server. Finishing this task was a bit herculean since the tutorial I referred to was outdated but thanks my previous exposure to Django and Python, I was able to debug the errors and finish this task within the given time-frame. The picture below shows a RESTful API.&lt;/p&gt;
+&lt;h2 id=&#34;10-creating-a-website&#34;&gt;10. Creating A Website&lt;/h2&gt;
+&lt;p&gt;Thanks to all the things I learnt during GCI, I have now created a blog for myself and the blog I&amp;rsquo;ve created is the one you&amp;rsquo;re currently reading 😄. This website is hosted through &lt;strong&gt;GitHub Pages&lt;/strong&gt; and the posts are written using &lt;strong&gt;Markdown&lt;/strong&gt;. I&amp;rsquo;ve also used 
+&lt;a href=&#34;https://travis-ci.org&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Travis&lt;/a&gt; to constantly detect my pushes, build them and push the build to the &lt;strong&gt;master branch&lt;/strong&gt; of the website repository.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;the-challenges-i-faced&#34;&gt;The Challenges I Faced:&lt;/h1&gt;
+&lt;p&gt;While doing the Google Code-in tasks, I didn&amp;rsquo;t face any huge challenges as such. But still challenges are challenges and these are the ones I faced:&lt;/p&gt;
+&lt;h2 id=&#34;1-ansible-openwisp2&#34;&gt;1. ansible-openwisp2&lt;/h2&gt;
+&lt;p&gt;In one of my tasks, I had to debug the 
+&lt;a href=&#34;https://github.com/openwisp/ansible-openwisp2&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;ansible-openwisp2&lt;/a&gt;. The issue seemed to be caused by a python library (spatialite) on specific systems (operating systems). The repo worked on newer operating systems such as &lt;strong&gt;Ubuntu 16.04&lt;/strong&gt; but failed on the older ones. Since I was very desperate to fix this bug, I had spent hours doing the testing but to no end. Lastly, a very basic fix removed the issue, and that fix was updating &lt;strong&gt;ansible&lt;/strong&gt; to the latest version.&lt;/p&gt;
+&lt;h2 id=&#34;2-creating-a-restful-api-using-python-and-django&#34;&gt;2. Creating a RESTful API using Python and Django&lt;/h2&gt;
+&lt;p&gt;This task was a bit time consuming due to the outdated tutorial I referred to for learning RESTful API creation. As much as I remember, I had to do several modifications of mine to get the API to work, the major ones of them being:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Downgrading to &lt;strong&gt;good &amp;lsquo;ol Django version 1.10&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;Installing the &lt;strong&gt;rest-framework-swagger v0.3.10&lt;/strong&gt; django module.&lt;/li&gt;
+&lt;li&gt;Installing the &lt;strong&gt;django-rest-framework v0.1.0&lt;/strong&gt; django module.&lt;/li&gt;
+&lt;li&gt;Adding &lt;code&gt;fields=&#39;__all__&#39;&lt;/code&gt; to the Serializers.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;You might think as to why I did the downgrading, which is a correct point. I did so because the skeleton django project which I was using was configured according to the &lt;strong&gt;older django&lt;/strong&gt; and django evolves pretty fast, trust me.&lt;/p&gt;
+&lt;h2 id=&#34;3-vagrant&#34;&gt;3. Vagrant&lt;/h2&gt;
+&lt;p&gt;Vagrant is a tool which allows the easy creation of VMs and also the installation of huge projects just by running a single file named &lt;code&gt;Vagrantfile&lt;/code&gt;. As I&amp;rsquo;ve stated earlier, I have a really outdated PC. Vagrant requires &lt;strong&gt;VTI -x&lt;/strong&gt; which my PC didn&amp;rsquo;t have. This fact really set me back big-time. Luckily I was able to do one Vagrant task using my college-returned brother&amp;rsquo;s laptop, but wasn&amp;rsquo;t able to do any other Vagrant tasks afterwards since he had returned to his college.
+I also tried searching for a way to use Vagrant without this feature but had no success. That&amp;rsquo;s why I had to leave a few Vagrant tasks. I also wanted to contribute to a repository by creating a &lt;code&gt;Vagrantfile&lt;/code&gt; for it, but I was unable to do so since I wasn&amp;rsquo;t able to run Vagrant.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;aspects-i-didnt-like&#34;&gt;Aspects I didn&amp;rsquo;t Like:&lt;/h1&gt;
+&lt;p&gt;There &lt;strong&gt;aren&amp;rsquo;t&lt;/strong&gt; really any aspects about GCI or OpenWISP that I don&amp;rsquo;t like. However I do have a few suggestions for &lt;strong&gt;OpenWISP&lt;/strong&gt;:&lt;/p&gt;
+&lt;h2 id=&#34;1-scarcity-of-mentors&#34;&gt;1. Scarcity of Mentors&lt;/h2&gt;
+&lt;p&gt;I feel that there&amp;rsquo;s a scarcity of mentors in OpenWISP, and it&amp;rsquo;s a huge setback. It causes &lt;strong&gt;task reviewing delays&lt;/strong&gt;. This is also very burdening for the mentors who have the responsibility of reviewing the tasks&lt;/p&gt;
+&lt;h2 id=&#34;2-activity-time-slots-of-mentors&#34;&gt;2. Activity Time Slots of Mentors&lt;/h2&gt;
+&lt;p&gt;This suggestion actually supplements the above one in a way. Since most of the mentors belong to the same continent, therefore they are active only during one part of the day. This causes issues for someone in an incompatible time zone since he/she has to &lt;strong&gt;break his/her daily routine&lt;/strong&gt; to reach the mentors.&lt;/p&gt;
+&lt;h2 id=&#34;3-not-all-mentors-appear-on-gitter&#34;&gt;3. Not all Mentors appear on Gitter&lt;/h2&gt;
+&lt;p&gt;I&amp;rsquo;ve noticed that not all mentors appear on Gitter to answer the queries of the participants, which isn&amp;rsquo;t a good sign. So increasing mentor participations in the discussion platforms(such as Gitter) would be a good start.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;ending-note&#34;&gt;Ending Note&lt;/h1&gt;
+&lt;p&gt;Phew, I didn&amp;rsquo;t think that my write-up would be this huge, looks like I still have a long way to go as a writer.
+Anyways, I just wanted to say that I&amp;rsquo;m really, &lt;strong&gt;whole-heartedly&lt;/strong&gt; thankful to &lt;strong&gt;Google Code-in&lt;/strong&gt; as well as &lt;strong&gt;OpenWISP&lt;/strong&gt; for increasing my skill-set significantly. I never would&amp;rsquo;ve thought that I&amp;rsquo;d be able to learn python, host &lt;strong&gt;my own&lt;/strong&gt; website and all the stuff which I&amp;rsquo;ve learnt in these &lt;strong&gt;challenging yet fun&lt;/strong&gt;  forty days.
+I really appreciate the guidance &lt;strong&gt;OpenWISP&lt;/strong&gt; provided since I was a mere beginner at everything when I had planned to enter &lt;strong&gt;Google Code-in&lt;/strong&gt;, but now I&amp;rsquo;ve leveled up 😄. I&amp;rsquo;ve also made some great friends along the way with whom I love discussing programming-related stuff.
+I really hope that one day I&amp;rsquo;ll be able to improve my skills to that extent at which I&amp;rsquo;ll be able to contribute to OpenWISP &lt;strong&gt;as a mentor&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;That&amp;rsquo;s all that I have to to say. Actually, no 😉 ! I&amp;rsquo;d like to share a quote before that:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Everything seems difficult until and unless you give it a try.&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

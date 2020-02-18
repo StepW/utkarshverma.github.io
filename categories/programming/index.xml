@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>programming | Utkarsh Verma</title>
+    <link>/categories/programming/</link>
+      <atom:link href="/categories/programming/index.xml" rel="self" type="application/rss+xml" />
+    <description>programming</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>**© 2018 - 2020 Utkarsh Verma**</copyright><lastBuildDate>Sun, 14 Jan 2018 08:58:40 +0000</lastBuildDate>
+    <image>
+      <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
+      <title>programming</title>
+      <link>/categories/programming/</link>
+    </image>
+    
+    <item>
+      <title>Testing &#34;django-netjsonconfig&#34;</title>
+      <link>/post/netjsonconfig/</link>
+      <pubDate>Sun, 14 Jan 2018 08:58:40 +0000</pubDate>
+      <guid>/post/netjsonconfig/</guid>
+      <description>&lt;p&gt;A task came up in Google Code-in which asked me to install the 
+&lt;a href=&#34;https://github.com/openwisp/django-netjsonconfig&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;django-netjsonconfig&lt;/a&gt; module by 
+&lt;a href=&#34;https://www.openwisp.org&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;OpenWISP&lt;/a&gt;. Furthermore, I&amp;rsquo;m also supposed to share the challenges I faced during the set-up process as a sort of feedback. I&amp;rsquo;ll be trying be concise in this post so, without further ado, I&amp;rsquo;m beginning with this post.&lt;/p&gt;
+&lt;h1 id=&#34;installing-django-netjsonconfig&#34;&gt;Installing &amp;ldquo;django-netjsonconfig&amp;rdquo;&lt;/h1&gt;
+&lt;p&gt;The installation instructions for this this module have been well-documented on its 
+&lt;a href=&#34;https://github.com/openwisp/django-netjsonconfig#installing-for-development&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;GitHub repository&lt;/a&gt;. So I began the installation by creating a &lt;strong&gt;Python 2.7 Virtual Environment&lt;/strong&gt; using &lt;code&gt;python2 -m virtualenv py2&lt;/code&gt; for the sake of cleanliness on my local machine. I chose &lt;code&gt;python2&lt;/code&gt; for since for this since I was also on the lookout for bugs in the module and most of the bugs seem to be related with it since it&amp;rsquo;s a bit outdated now.&lt;br&gt;
+I then activated the &lt;code&gt;virtualenv&lt;/code&gt; and started entering the installation commands according to the instructions in the repository. Everything went on smoothly until the &lt;code&gt;python setup.py develop&lt;/code&gt; command. I got an error as shown in the below picture.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;images/django2.png&#34; alt=&#34;develop failed&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Clearly, the error suggests that &lt;strong&gt;Django v2.0.1&lt;/strong&gt; was being downloaded which &lt;strong&gt;isn&amp;rsquo;t supported&lt;/strong&gt; by &lt;strong&gt;Python 2.7&lt;/strong&gt;. A bit of browsing led me to the conclusion that the &lt;code&gt;setup.py&lt;/code&gt; needed to be modified to download &lt;strong&gt;older Django versions&lt;/strong&gt; for Python 2.7. So, I added a simple &lt;code&gt;if-else&lt;/code&gt; block to the django installation statement as shown in the picture.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;images/my-fix.png&#34; alt=&#34;setup.py fix&#34;&gt;&lt;/p&gt;
+&lt;p&gt;If you&amp;rsquo;re curious about my fix,  this is the 
+&lt;a href=&#34;https://github.com/UtkarshVerma/django-netjsonconfig/commit/1575acbbc719e539cd8ecbffc761d8b9c2023d56&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;link&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Here, what&amp;rsquo;s being done is basically:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Detect &lt;code&gt;python&lt;/code&gt; version used for installation using &lt;code&gt;sys.version_info[0]&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Install older Django versions if &lt;code&gt;sys.version_info[0]&amp;lt;3&lt;/code&gt;, that is &lt;code&gt;python2&lt;/code&gt; is detected.&lt;/li&gt;
+&lt;li&gt;Install latest version if above condition isn&amp;rsquo;t satisfied, that is &lt;code&gt;python3&lt;/code&gt; is detected.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I also had to remove the django installation line from &lt;code&gt;requirements.txt&lt;/code&gt; since &lt;code&gt;setup.py&lt;/code&gt; was fetching the requirement names from there. After applying this fix, I re-ran the &lt;code&gt;python setup.py develop&lt;/code&gt; command and there it was! The sweet smell of success. Now an &lt;strong&gt;older yet python2 compatible&lt;/strong&gt; version of &lt;strong&gt;Django&lt;/strong&gt; was being installed when using &lt;code&gt;python2&lt;/code&gt; as clearly shown in one of the pictures below:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;images/django-v-fixed.png&#34; alt=&#34;Older Django being downloaded&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;images/Success!.png&#34; alt=&#34;Successful!&#34;&gt;&lt;/p&gt;
+&lt;p&gt;After this, I installed some more requirements using &lt;code&gt;pip install -r requirements-test.txt&lt;/code&gt;
+This was how I&amp;rsquo;d finished installing &lt;code&gt;django-netjsonconfig&lt;/code&gt; using Python2. Now all that was left to do was to to do the migrations and run the server.&lt;/p&gt;
+&lt;h1 id=&#34;making-migrations-and-creating-a-superuser&#34;&gt;Making Migrations and Creating a superuser&lt;/h1&gt;
+&lt;p&gt;By referring to the instructions on the repo again, I opened the &lt;code&gt;tests&lt;/code&gt; directory,
+did the migrations using &lt;code&gt;./manage.py migrate&lt;/code&gt;. It was really satisfying to see all the CLI responses coloured in &lt;strong&gt;green&lt;/strong&gt;. 😄
+&lt;img src=&#34;images/migrate.png&#34; alt=&#34;Migrate&#34;&gt;&lt;/p&gt;
+&lt;p&gt;After that, there was the superuser creation using &lt;code&gt;./manage.py createsuperuser&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;images/superuser.png&#34; alt=&#34;Superuser creation&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;running-the-test-server&#34;&gt;Running the Test Server&lt;/h1&gt;
+&lt;p&gt;I started the test server using &lt;code&gt;./manage.py runserver&lt;/code&gt; and it was successful.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;images/up-and-running.png&#34; alt=&#34;Server Up and Running!&#34;&gt;&lt;/p&gt;
+&lt;p&gt;I could also now visit the server at 
+&lt;a href=&#34;http://localhost/admin&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;http://localhost:8000/admin&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;images/logged-in.png&#34; alt=&#34;Logged In&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h1&gt;
+&lt;p&gt;So, that&amp;rsquo;s how I installed the &lt;strong&gt;django-netjsonconfig&lt;/strong&gt; module. Also, I&amp;rsquo;ve commited my fixes to my &lt;strong&gt;forked repo&lt;/strong&gt; 
+&lt;a href=&#34;https://github.com/UtkarshVerma/django-netjsonconfig&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;. Here&amp;rsquo;s the 
+&lt;a href=&#34;https://github.com/openwisp/django-netjsonconfig/pull/71&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;link to my pull request&lt;/a&gt;. That concludes this post.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
