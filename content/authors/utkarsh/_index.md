@@ -6,9 +6,6 @@ superuser: true
 role: Maker, Writer
 bio: A keen maker, programmer and a writer.
 
-headless: true
-type: "widget_page"
-
 interests:
 - Internet of Things
 - Arduino and Microcontrollers
@@ -25,12 +22,12 @@ social:
 - icon: envelope
   icon_pack: fas
   link: 'mailto:utkarshverma@protonmail.com'
-- icon: twitter
-  icon_pack: fab
-  link: https://twitter.com/UtkarshVerma_
 - icon: github
   icon_pack: fab
   link: https://github.com/UtkarshVerma
+- icon: twitter
+  icon_pack: fab
+  link: https://twitter.com/UtkarshVerma_
 - icon: linkedin
   icon_pack: fab
   link: https://www.linkedin.com/in/utkarshvermai/

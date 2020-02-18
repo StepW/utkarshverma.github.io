@@ -6,9 +6,12 @@ tags:
 - openwisp
 categories:
 - blogging
+authors:
+- utkarsh
 description : "My experiences with Google Code-in 2017 and OpenWISP."
 draft: false
 ---
+
 ![GCI](images/gci-wide.png)Recently I've been participating in [Google Code-in](https://codein.withgoogle.com/) which is Google's initiative to introduce young minds to the concept of **FOSS**, that is **Free or Open-Source Softwares**. This post is for sharing my experiences with GCI, as the title suggests. So let's just get on it.
 
 It all began while I was returning from an outing on **5 December, 2017** and was searching the internet for [Google Science Fair](https://www.googlesciencefair.com/) to check if I could participate in it or not. When I searched it and scrolled down, I saw a link for **Google Code-in**. The very combination of the words *Google* and *Code* had raised my adrenaline levels and so I starting reading about it and after a few moments, I had decided to participate in it. Soon I had my father fill up the **Parental Consent** and I was ready to begin.

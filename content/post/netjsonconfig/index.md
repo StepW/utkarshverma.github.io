@@ -1,5 +1,7 @@
 ---
 title: "Testing \"django-netjsonconfig\""
+authors:
+- utkarsh
 date: 2018-01-14T14:28:40+05:30
 tags:
 - google code in
