@@ -37,10 +37,7 @@ subtitle = ""
   #   3 = Card
   #   4 = Citation (publication only)
   view = 2
-  
-[design.background]
-  color = "#272935" 
-  
+
 [advanced]
  # Custom CSS. 
  css_style = ""

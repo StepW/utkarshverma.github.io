@@ -1,4 +1,16 @@
-site-footer,
+$footer: transparent;
+$footer_text: rgba(255,255,255,0.54);
+
+.site-footer,
 footer a.back-to-top i {
-    color: rgba(255,255,255,0.54);
+    color: $footer_text;
+}
+
+.site-footer {
+/*  box-shadow: 0 -0.125rem 0.25rem 0 rgba(255, 255, 255, .11);
+    width: 100%;
+    left: 0;
+    background-color: $footer;*/
+    margin-top: 2rem;
+    padding-top: 3rem;
 }

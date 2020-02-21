@@ -1,0 +1,18 @@
+name: Alpha
+light: false
+
+primary: rgb(0, 136, 204)
+background: rgb(29, 33, 39)
+
+menu_primary: rgb(33, 37, 41)
+menu_text: rgb(0, 136, 204)
+menu_text_active: rgba(255,255,255,1)
+menu_title: rgb(153, 153, 153)
+
+home_section_odd: rgb(29, 33, 39)
+home_section_even: rgb(39, 41, 53)
+
+## Configure the footer in "custom.scss"
+
+# link:
+# link_hover:

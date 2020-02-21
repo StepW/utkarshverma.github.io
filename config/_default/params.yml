@@ -1,0 +1,67 @@
+theme: alpha
+day_night: false
+font: traditional serif
+font_size: L
+site_type: Project
+description: 'A blog about linux, electronics and programming.'
+highlight: true
+highlight_languages:
+  - r
+math: false
+diagram: false
+privacy_pack: true
+email: utkarshverma@protonmail.com
+phone: ''
+contact_links:
+  - icon: twitter
+    icon_pack: fab
+    name: DM Me
+    link: 'https://twitter.com/@UtkarshVerma_'
+  - icon: keybase
+    icon_pack: fab
+    name: Chat on Keybase
+    link: 'https://keybase.io/UtkarshVerma'
+  - icon: comments
+    icon_pack: fas
+    name: Discuss on Forum
+    link: 'https://discourse.gohugo.io/UtkarshVerma_'
+  - icon: telegram
+    icon_pack: fab
+    name: Telegram Me
+    link: 'https://telegram.me/UtkarshVerma'
+sharing_image: ''
+twitter: UtkarshVerma_
+date_format: 'Jan 2, 2006'
+time_format: '3:04 PM'
+main_menu:
+  align: l
+  show_logo: true
+reading_time: true
+section_pager: false
+docs_section_pager: true
+sharing: true
+link_authors: true
+avatar:
+  gravatar: false
+  shape: circle
+projects:
+  post_view: 2
+  publication_view: 2
+  talk_view: 2
+comments:
+  engine: 1
+  commentable:
+    page: true
+    post: true
+    docs: true
+    project: true
+    publication: true
+    talk: true
+  disqus:
+    shortname: utkarshvermablog
+    show_count: true
+search:
+  engine: 1
+marketing:
+  google_analytics: ''
+  google_tag_manager: ''

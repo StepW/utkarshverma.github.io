@@ -1,0 +1,16 @@
+main:
+- name: Home
+  url: "#posts"
+  weight: 10
+- name: Tags
+  url: tags
+  weight: 20
+- name: Categories
+  url: categories
+  weight: 30
+- name: Authors
+  url: authors
+  weight: 40
+- name: About
+  url: about
+  weight: 50
