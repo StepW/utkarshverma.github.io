@@ -3,6 +3,16 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/about/</loc>
+    <lastmod>2020-02-21T12:34:28+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2020-02-21T12:34:28+05:30</lastmod>
+  </url>
+  
+  <url>
     <loc>/authors/utkarsh/</loc>
     <lastmod>2018-01-28T18:59:43+05:30</lastmod>
   </url>
@@ -53,11 +63,6 @@
   </url>
   
   <url>
-    <loc>/</loc>
-    <lastmod>2018-01-28T18:59:43+05:30</lastmod>
-  </url>
-  
-  <url>
     <loc>/tags/django/</loc>
     <lastmod>2018-01-14T08:58:40+00:00</lastmod>
   </url>
@@ -93,15 +98,19 @@
   </url>
   
   <url>
-    <loc>/project/blufi/</loc>
+    <loc>/authors/atharva/</loc>
   </url>
   
   <url>
-    <loc>/project/convertendo/</loc>
+    <loc>/project/utkarsh/blufi/</loc>
   </url>
   
   <url>
-    <loc>/project/ecosia/</loc>
+    <loc>/project/utkarsh/convertendo/</loc>
+  </url>
+  
+  <url>
+    <loc>/project/utkarsh/ecosia/</loc>
   </url>
   
   <url>
@@ -109,19 +118,19 @@
   </url>
   
   <url>
-    <loc>/project/esper/</loc>
+    <loc>/project/utkarsh/esper/</loc>
   </url>
   
   <url>
-    <loc>/project/dream-plus/</loc>
+    <loc>/project/utkarsh/dream-plus/</loc>
   </url>
   
   <url>
-    <loc>/project/lfr/</loc>
+    <loc>/project/utkarsh/lfr/</loc>
   </url>
   
   <url>
-    <loc>/project/mos/</loc>
+    <loc>/project/utkarsh/mos/</loc>
   </url>
   
   <url>
@@ -137,7 +146,7 @@
   </url>
   
   <url>
-    <loc>/project/yaru/</loc>
+    <loc>/project/utkarsh/yaru/</loc>
   </url>
   
 </urlset>
