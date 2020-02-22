@@ -204,6 +204,44 @@
 
 
 
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-112332904-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+      dataLayer.push(arguments);
+  }
+
+  function trackOutboundLink(url, target) {
+    gtag('event', 'click', {
+         'event_category': 'outbound',
+         'event_label': url,
+         'transport_type': 'beacon',
+         'event_callback': function () {
+           if (target !== '_blank') {
+             document.location = url;
+           }
+         }
+    });
+    console.debug("Outbound link clicked: " + url);
+  }
+
+  function onClickCallback(event) {
+    if ((event.target.tagName !== 'A') || (event.target.host === window.location.host)) {
+      return;
+    }
+    trackOutboundLink(event.target, event.target.getAttribute('target'));  
+  }
+
+  gtag('js', new Date());
+  gtag('config', 'UA-112332904-3', { 'anonymize_ip': true });
+
+  
+  document.addEventListener('click', onClickCallback, false);
+</script>
+
+
   
 
 
@@ -414,25 +452,16 @@
         
         
         
-          
-        
 
         
         
         
         
         
-        
-          
-          
-          
-            
-          
-          
         
 
         <li class="nav-item">
-          <a class="nav-link " href="/#posts"><span>Home</span></a>
+          <a class="nav-link " href="/#"><span>Home</span></a>
         </li>
 
         
@@ -548,8 +577,7 @@
 
 
   <article class="article">
-
-  
+	
 
 
 
@@ -663,11 +691,9 @@
 </div>
 
 
-
-  <div class="article-container">
-
-    <div class="article-style">
-      <p><img src="images/intro-small.jpeg" alt="Intro"></p>
+	<div class="article-container">
+		<div class="article-style">
+			<p><img src="images/intro-small.jpeg" alt="Intro"></p>
 <p>Recently I&rsquo;ve got my hands on the craved-for IoT <strong>ESP32</strong>, thanks to <strong>
 <a href="https://www.dfrobot.com" target="_blank" rel="noopener">DFRobot</a></strong>, and have been tinkering with it ever since. I&rsquo;m really amazed by it since it packs both <strong>Bluetooth</strong> and <strong>WiFi</strong> in a small yet powerful unit. Since I received the <strong>MCU</strong> rather than the module, so, to use it, I made myself a breakout board named <strong>ESPer</strong>(because, why not? 😄). Feel free to check out its Instructable over 
 <a href="https://www.instructables.com/id/DIY-ESP32-Development-Board-ESPer/" target="_blank" rel="noopener">here</a>.</p>
@@ -676,7 +702,7 @@
 <p>If you&rsquo;re more curious about Mongoose OS, check out it&rsquo;s official site: 
 <a href="https://www.mongoose-os.com" target="_blank" rel="noopener">Mongoose OS</a>.</p>
 <hr>
-<h1 id="prepping-and-beginning">Prepping and Beginning!</h1>
+<h1 id="prepping-and-beginning">Prepping and Beginning!&nbsp;<a class="anchor" href="#prepping-and-beginning"><i class="fas fa-link"></i></a> </h1>
 <p>To flash your <strong>ESPer</strong> with <strong>Mongoose OS</strong>, you&rsquo;re supposed to have the following things at bay:</p>
 <ul>
 <li>ESPer or ESP32 MCU.</li>
@@ -693,7 +719,7 @@
 </ul>
 <p>That&rsquo;s all for the requirements. Once you&rsquo;re sure you&rsquo;ve got all the stuff, boost ahead!</p>
 <hr>
-<h1 id="installing-the-mos-tool">Installing the mos Tool</h1>
+<h1 id="installing-the-mos-tool">Installing the mos Tool&nbsp;<a class="anchor" href="#installing-the-mos-tool"><i class="fas fa-link"></i></a> </h1>
 <p><img src="images/mos.png" alt="mos ui">
 The Mongoose OS website provides an easy-to-use tool for <strong>flashing</strong> and <strong>managing</strong> Mongoose OS on devices. This tool also aids in uploading code and in numerous other tasks.</p>
 <p>The installation instructions have been documented on the official website 
@@ -704,7 +730,7 @@ $ sudo apt-get update
 $ sudo apt-get install mos
 </code></pre>
 <hr>
-<h1 id="wiring-up-esper">Wiring up ESPer</h1>
+<h1 id="wiring-up-esper">Wiring up ESPer&nbsp;<a class="anchor" href="#wiring-up-esper"><i class="fas fa-link"></i></a> </h1>
 <p><img src="images/wiring.jpg" alt="Wiring Diagram">
 Once the tool is downloaded, wire up your ESPer with any <strong>USB to TTL Converter</strong> since the flashing is to be done via <strong>UART</strong>.</p>
 <p>To keep things applicable to a larger reader-base, I&rsquo;ll be proceeding with my good &lsquo;ol <strong>Arduino UNO</strong>. It&rsquo;s possible to use an Arduino as a <strong>USB to TTL Converter</strong> since it has an in-built <strong>CH340G Converter</strong> which the Arduino uses for programming the ATmega IC.
@@ -715,7 +741,7 @@ Now wire up <strong>ESPer</strong> according to the wiring diagram posted above.
 </blockquote>
 <p>Once that&rsquo;s done, connect your Arduino to your PC or any other device.</p>
 <hr>
-<h1 id="flashing-the-firmware">Flashing the Firmware</h1>
+<h1 id="flashing-the-firmware">Flashing the Firmware&nbsp;<a class="anchor" href="#flashing-the-firmware"><i class="fas fa-link"></i></a> </h1>
 <p>Now that everything&rsquo;s done, all that&rsquo;s left to do is to flash the firmware onto the ESPer board. To do that:</p>
 <ul>
 <li>Launch the <strong>mos tool</strong>. In my case, that is Linux, it is opened by entering <code>mos</code> in the terminal. This will open up the <strong>mos Web UI</strong> in your web browser.
@@ -727,7 +753,7 @@ Now wire up <strong>ESPer</strong> according to the wiring diagram posted above.
 </ul>
 <p>This concludes the flashing process.</p>
 <hr>
-<h1 id="configuring-the-wifi-settings">Configuring the WiFi Settings</h1>
+<h1 id="configuring-the-wifi-settings">Configuring the WiFi Settings&nbsp;<a class="anchor" href="#configuring-the-wifi-settings"><i class="fas fa-link"></i></a> </h1>
 <p><img src="images/wifi.png" alt="WiFi">
 So we have flashed the Mongoose OS firmware in our ESPer board now, but we still haven&rsquo;t configured the <strong>WiFi Settings</strong> which is the most important feature of IoT devices since they have to be connected to the internet. To configure WiFi:</p>
 <ul>
@@ -736,7 +762,7 @@ So we have flashed the Mongoose OS firmware in our ESPer board now, but we still
 <li>Enter the WiFi settings and that&rsquo;s it.</li>
 </ul>
 <hr>
-<h1 id="the-skys-the-limit">The Sky&rsquo;s the Limit</h1>
+<h1 id="the-skys-the-limit">The Sky&rsquo;s the Limit&nbsp;<a class="anchor" href="#the-skys-the-limit"><i class="fas fa-link"></i></a> </h1>
 <p>Now that you&rsquo;ve installed an OS on your ESPer board or ESP32, you can do almost anything with it, be it a <strong>mini Arduino</strong> or a <strong>WiFi server</strong>, you name it. So go ahead and start coding and making. The video below shows my ESPer flashed with the
 <strong>Blink Code</strong>.</p>
 
@@ -755,9 +781,8 @@ So we have flashed the Mongoose OS firmware in our ESPer board now, but we still
 <p>Thanks for reading!  😀</p>
 <p><strong>Keep Making!</strong></p>
 
-    </div>
-
-    
+		</div>
+		
 
 
 
@@ -1022,8 +1047,7 @@ So we have flashed the Mongoose OS firmware in our ESPer board now, but we still
   
 
 
-
-  </div>
+	</div>
 </article>
 
       
@@ -1136,6 +1160,7 @@ So we have flashed the Mongoose OS firmware in our ESPer board now, but we still
 
   
   
+  <div class="spacer container"></div>
   <div class="container">
     <footer class="site-footer">
   

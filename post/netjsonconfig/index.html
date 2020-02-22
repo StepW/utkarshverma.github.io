@@ -205,6 +205,44 @@ Installing &ldquo;django-netjsonconfig&rdquo; The installation instructions for 
 
 
 
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-112332904-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+      dataLayer.push(arguments);
+  }
+
+  function trackOutboundLink(url, target) {
+    gtag('event', 'click', {
+         'event_category': 'outbound',
+         'event_label': url,
+         'transport_type': 'beacon',
+         'event_callback': function () {
+           if (target !== '_blank') {
+             document.location = url;
+           }
+         }
+    });
+    console.debug("Outbound link clicked: " + url);
+  }
+
+  function onClickCallback(event) {
+    if ((event.target.tagName !== 'A') || (event.target.host === window.location.host)) {
+      return;
+    }
+    trackOutboundLink(event.target, event.target.getAttribute('target'));  
+  }
+
+  gtag('js', new Date());
+  gtag('config', 'UA-112332904-3', { 'anonymize_ip': true });
+
+  
+  document.addEventListener('click', onClickCallback, false);
+</script>
+
+
   
 
 
@@ -416,25 +454,16 @@ Installing &ldquo;django-netjsonconfig&rdquo; The installation instructions for 
         
         
         
-          
-        
 
         
         
         
         
         
-        
-          
-          
-          
-            
-          
-          
         
 
         <li class="nav-item">
-          <a class="nav-link " href="/#posts"><span>Home</span></a>
+          <a class="nav-link " href="/#"><span>Home</span></a>
         </li>
 
         
@@ -550,8 +579,7 @@ Installing &ldquo;django-netjsonconfig&rdquo; The installation instructions for 
 
 
   <article class="article">
-
-  
+	
 
 
 
@@ -663,14 +691,12 @@ Installing &ldquo;django-netjsonconfig&rdquo; The installation instructions for 
 </div>
 
 
-
-  <div class="article-container">
-
-    <div class="article-style">
-      <p>A task came up in Google Code-in which asked me to install the 
+	<div class="article-container">
+		<div class="article-style">
+			<p>A task came up in Google Code-in which asked me to install the 
 <a href="https://github.com/openwisp/django-netjsonconfig" target="_blank" rel="noopener">django-netjsonconfig</a> module by 
 <a href="https://www.openwisp.org" target="_blank" rel="noopener">OpenWISP</a>. Furthermore, I&rsquo;m also supposed to share the challenges I faced during the set-up process as a sort of feedback. I&rsquo;ll be trying be concise in this post so, without further ado, I&rsquo;m beginning with this post.</p>
-<h1 id="installing-django-netjsonconfig">Installing &ldquo;django-netjsonconfig&rdquo;</h1>
+<h1 id="installing-django-netjsonconfig">Installing &ldquo;django-netjsonconfig&rdquo;&nbsp;<a class="anchor" href="#installing-django-netjsonconfig"><i class="fas fa-link"></i></a> </h1>
 <p>The installation instructions for this this module have been well-documented on its 
 <a href="https://github.com/openwisp/django-netjsonconfig#installing-for-development" target="_blank" rel="noopener">GitHub repository</a>. So I began the installation by creating a <strong>Python 2.7 Virtual Environment</strong> using <code>python2 -m virtualenv py2</code> for the sake of cleanliness on my local machine. I chose <code>python2</code> for since for this since I was also on the lookout for bugs in the module and most of the bugs seem to be related with it since it&rsquo;s a bit outdated now.<br>
 I then activated the <code>virtualenv</code> and started entering the installation commands according to the instructions in the repository. Everything went on smoothly until the <code>python setup.py develop</code> command. I got an error as shown in the below picture.</p>
@@ -690,26 +716,25 @@ I then activated the <code>virtualenv</code> and started entering the installati
 <p><img src="images/Success!.png" alt="Successful!"></p>
 <p>After this, I installed some more requirements using <code>pip install -r requirements-test.txt</code>
 This was how I&rsquo;d finished installing <code>django-netjsonconfig</code> using Python2. Now all that was left to do was to to do the migrations and run the server.</p>
-<h1 id="making-migrations-and-creating-a-superuser">Making Migrations and Creating a superuser</h1>
+<h1 id="making-migrations-and-creating-a-superuser">Making Migrations and Creating a superuser&nbsp;<a class="anchor" href="#making-migrations-and-creating-a-superuser"><i class="fas fa-link"></i></a> </h1>
 <p>By referring to the instructions on the repo again, I opened the <code>tests</code> directory,
 did the migrations using <code>./manage.py migrate</code>. It was really satisfying to see all the CLI responses coloured in <strong>green</strong>. 😄
 <img src="images/migrate.png" alt="Migrate"></p>
 <p>After that, there was the superuser creation using <code>./manage.py createsuperuser</code>.</p>
 <p><img src="images/superuser.png" alt="Superuser creation"></p>
-<h1 id="running-the-test-server">Running the Test Server</h1>
+<h1 id="running-the-test-server">Running the Test Server&nbsp;<a class="anchor" href="#running-the-test-server"><i class="fas fa-link"></i></a> </h1>
 <p>I started the test server using <code>./manage.py runserver</code> and it was successful.</p>
 <p><img src="images/up-and-running.png" alt="Server Up and Running!"></p>
 <p>I could also now visit the server at 
 <a href="http://localhost/admin" target="_blank" rel="noopener">http://localhost:8000/admin</a>.</p>
 <p><img src="images/logged-in.png" alt="Logged In"></p>
-<h1 id="conclusion">Conclusion</h1>
+<h1 id="conclusion">Conclusion&nbsp;<a class="anchor" href="#conclusion"><i class="fas fa-link"></i></a> </h1>
 <p>So, that&rsquo;s how I installed the <strong>django-netjsonconfig</strong> module. Also, I&rsquo;ve commited my fixes to my <strong>forked repo</strong> 
 <a href="https://github.com/UtkarshVerma/django-netjsonconfig" target="_blank" rel="noopener">here</a>. Here&rsquo;s the 
 <a href="https://github.com/openwisp/django-netjsonconfig/pull/71" target="_blank" rel="noopener">link to my pull request</a>. That concludes this post.</p>
 
-    </div>
-
-    
+		</div>
+		
 
 
 
@@ -983,8 +1008,7 @@ did the migrations using <code>./manage.py migrate</code>. It was really satisfy
   
 
 
-
-  </div>
+	</div>
 </article>
 
       
@@ -1097,6 +1121,7 @@ did the migrations using <code>./manage.py migrate</code>. It was really satisfy
 
   
   
+  <div class="spacer container"></div>
   <div class="container">
     <footer class="site-footer">
   
