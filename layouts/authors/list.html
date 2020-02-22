@@ -10,7 +10,7 @@
     {{ $style = printf "background-color: %s;" (. | default "transparent") }}
   {{ end }}
 
-  <section id="{{ $widget.name }}" class="home-section {{printf "wg-%s" (replace $widget.name "_" "-")}}" {{with $style}}style="{{. | safeCSS}}"{{end}}>
+  <section id="{{ $widget.name }}" class="home-section {{printf "wg-%s" ($widget.name | anchorize) }}" {{with $style}}style="{{. | safeCSS}}"{{end}}>
     {{ $path := printf "widgets/%s" $widget.name }}
     <div class="container">
         {{ partial $path (dict "page" $page "widget" $widget) }}

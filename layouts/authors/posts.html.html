@@ -1,0 +1,20 @@
+{{- define "main" -}}
+
+<div class="universal-wrapper pt-3" style="margin-bottom: 1rem;">
+  <h1>{{ printf "%s / Posts" $.Data.Term }}</h1>
+</div>
+
+<div class="universal-wrapper">
+  {{ range .Data.author.Pages }} 
+    {{ if eq $.Params.view 1 }}
+      {{ partial "li_list" . }}
+    {{ else if eq $.Params.view 3 }}
+      {{ partial "li_card" . }}
+    {{ else }}
+     {{ partial "li_compact" . }}
+    {{ end }}
+  {{ end }}
+  {{ partial "pagination" . }}
+</div>
+
+{{- end -}}
